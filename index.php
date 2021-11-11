@@ -20,6 +20,10 @@ switch ($accion) {
         include_once __DIR__.'/controlador/controlador-inicio.php';
         break;
 
+    case 'salir':
+        include_once __DIR__.'/controlador/controlador-salir.php';
+        break;
+
 }
 
 ?>

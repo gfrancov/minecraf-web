@@ -24,10 +24,19 @@ if($_POST) {
 
     if(password_verify($pass,$contra)) {
 
+        // Iniciar sesión
         session_start();
         $_SESSION['datosUsuario'] = $usuario;
         $_SESSION['logueado'] = true;
         header('Location: index.php?p=inicio');
+
+        // Consultar skin a la base de datos
+        include_once __DIR__.'/../modelo/modelo-skin.php';
+        if(mysqli_num_rows($resultConsultarSkin) > 0 ) {
+            while ($skinUsuario = mysqli_fetch_assoc($resultConsultarSkin)) {
+                $_SESSION['skin'] = $skinUsuario['Skin'];
+            }
+        }
 
 
     } else {
@@ -37,21 +46,21 @@ if($_POST) {
         $mensajeError = "El usuario y contraseña proporcionados no son correctos.";
 
         // Vista de error
-        include_once __DIR__.'/../vista/error.php';
+        include_once __DIR__.'/../vista/vista-error.php';
 
 
     }
 
 
 
-} elseif(isset($_SESSION['email'])) {
+} elseif(isset($_SESSION['logueado'])) {
 
-    include_once __DIR__.'/controlador-menu.php';
+    include_once __DIR__.'/controlador-inicio.php';
 
 } else {
 
     // Printem el formulari d'inici de sessió
-    include_once __DIR__.'/../vista/login.html';
+    include_once __DIR__.'/../vista/vista-login.html';
 
 }
 

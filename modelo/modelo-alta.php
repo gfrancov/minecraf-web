@@ -5,7 +5,7 @@ include_once __DIR__.'/modelo-database.php';
 
 function tokenCreado($nickname, $token) {
  
-    $conexion = conexionDatabase();
+    $conexion = conexionDatabase('mcweb');
     $comprovarUsuario = "SELECT * FROM tempreg WHERE nick = '{$nickname}' AND token = '{$token}'";
     $resultcomprovarUsuario = mysqli_query($conexion, $comprovarUsuario);
 
@@ -17,7 +17,7 @@ function tokenCreado($nickname, $token) {
 
 function usuarioRegistrado($nickname) {
 
-    $conexion = conexionDatabase();
+    $conexion = conexionDatabase('mcweb');
     $usuarioRegistrado = "SELECT * FROM users WHERE nick = '{$nickname}'";
     $resultUsuarioRegistrado = mysqli_query($conexion, $usuarioRegistrado);
 
@@ -29,8 +29,8 @@ function usuarioRegistrado($nickname) {
 
 function crearUsuario($nickname, $contra) {
 
-    $conexion = conexionDatabase();
-    $crearUsuario = "INSERT INTO `users` (nick, pass, skin) VALUES ('{$nickname}', '{$contra}', '{$nickname}')";
+    $conexion = conexionDatabase('mcweb');
+    $crearUsuario = "INSERT INTO `users` (nick, pass) VALUES ('{$nickname}', '{$contra}')";
     $resultCrearUsuario = mysqli_query($conexion, $crearUsuario);
 
     return $resultCrearUsuario;

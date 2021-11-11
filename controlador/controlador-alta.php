@@ -31,7 +31,7 @@ if ($_POST) {
                 $mensajeError = "El usuario que estás intentando registrar ya existe en la base de datos.";
 
                 // Vista de error
-                include_once __DIR__.'/../vista/error.php';
+                include_once __DIR__.'/../vista/vista-error.php';
 
             } else {
 
@@ -44,7 +44,7 @@ if ($_POST) {
                     $mensajeError = "Se ha producido un error al crear el usuario.";
 
                     // Vista de error
-                    include_once __DIR__.'/../vista/error.php';
+                    include_once __DIR__.'/../vista/vista-error.php';
 
                 } else {
 
@@ -60,7 +60,7 @@ if ($_POST) {
             $mensajeError = "El nombre de usuario o el token proporcionados no son correctos.";
 
             // Vista de error
-            include_once __DIR__.'/../vista/error.php';
+            include_once __DIR__.'/../vista/vista-error.php';
 
         }
 
@@ -71,13 +71,13 @@ if ($_POST) {
         $mensajeError = "Las contraseñas introducidas no coinciden.";
 
         // Vista de error
-        include_once __DIR__.'/../vista/error.php';
+        include_once __DIR__.'/../vista/vista-error.php';
 
     }
 
 } else {
 
-    include_once __DIR__.'/../vista/alta.html';
+    include_once __DIR__.'/../vista/vista-alta.html';
 
 }
 
