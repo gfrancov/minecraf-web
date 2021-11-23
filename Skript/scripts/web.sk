@@ -1,0 +1,27 @@
+#
+# Test database
+#
+
+on script load:
+	set {-sql} to the database "mysql://144.91.64.140:3306/mcweb?user=gfranco&password=+H1m@n0S&useSSL=false"
+
+command /dbtest:
+	trigger:
+		execute "select * from tempreg" in {-sql} and store the result in {_output::*}
+		send "First entry in column: %{_output::nick::1}%"
+
+command /web:
+	trigger:
+		set {_random} to a random integer between 1 and 999999
+		send "&eGenerando token..."
+		wait 3 seconds
+		execute "DELETE FROM `tempreg` WHERE `nick` = %name of player%" in {-sql}
+		execute "INSERT INTO `tempreg` (`nick`,`token`) VALUES (%name of player%, %{_random}%)" in {-sql}
+		send "&2Tu token es: &a%{_random}%"
+		send "&2Puedes registrarte en &ahttps://mcweb.nebula.cat/"
+
+command /recompensa:
+	trigger:
+		set {_random} to a random integer between 1 and 999999
+		execute "INSERT INTO `tempreg` (`nick`,`token`) VALUES (%name of player%, %{_random}%)" in {-sql}
+		send "Token: %{_random}%"
